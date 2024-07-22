@@ -1,8 +1,10 @@
 export default {
     options: {
+        description: "echo",
+        usage: "echo <contents>",
         cooldown: 10
     },
     run: (terminal, args) => {
-        terminal.echo(args[0]);
+        terminal.echo(args.join(" "));
     }
 }

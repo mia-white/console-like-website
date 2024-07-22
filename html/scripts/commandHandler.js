@@ -1,27 +1,28 @@
-import commands from "./commands/allCommands.js";
+import CommandData from "./modules/CommandData.js";
 import CooldownManager from "./modules/CooldownManager.js";
 
-const commandsMap = new Map();
+const commandsMap = new CommandData();
 const Cooldown = new CooldownManager();
 
-// register commands to commandsMap
-for (const [cmdName, v] of Object.entries(commands)) {
-    commandsMap.set(cmdName, v);
-}
-
 const options = {
-    greetings: "my terminal",
+    greetings: "Welcome to lu's terminal",
     prompt: 'guest % '
 }
 
 const commandHandler = (command, terminal) => {
     // parse command
-    const [cmdName, ...args] = command.split(" ");
+    let [cmdName, ...args] = command.split(" ");
 
     if (cmdName === "") return;
 
-    if (commandsMap.has(cmdName)) {
-        const cmd = commandsMap.get(cmdName);
+    const alias = commandsMap.find(cmd => {
+        if (Array.isArray(cmd.options.alias)) {
+            return cmd.options.alias.includes(cmdName);
+        }
+    });
+
+    if (commandsMap.has(cmdName) || alias) {
+        const cmd = commandsMap.get(cmdName) || alias;
 
         // cooldown
         if (cmd.options.cooldown) {
@@ -41,4 +42,5 @@ const commandHandler = (command, terminal) => {
     }
 }
 
+// register
 $("body").terminal(commandHandler, options);
