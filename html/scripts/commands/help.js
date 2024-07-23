@@ -1,13 +1,15 @@
-import commands from "../modules/allCommands.js";
+import CommandData from "../modules/CommandData.js";
+
+const commands = new CommandData();
 
 const getCommandList = () => {
     let i = 1;
     const commandList = ["    "];
 
-    for (const k of Object.keys(commands)) {
+    for (const k of commands.keys()) {
         commandList.push(k);
 
-        if (i !== Object.keys(commands).length) {
+        if (i !== commands.size) {
             commandList.push(", ");
         }
 
@@ -25,20 +27,47 @@ const getCommandList = () => {
 export default {
     options: {
         description: "help command",
-        usage: "help <command name>"
+        usage: "help | help <commandName>"
     },
     run: (terminal, args) => {
 
         if (!args[0]) {
             const texts = [
+                "Command Name: help",
+                "",
+                "Usage:",
+                "",
+                "help              show all commands",
+                "help <command>    show command's detailed description",
+                "",
                 "All commands:",
-                getCommandList()
+                "",
+                getCommandList(),
+                ""
             ];
 
             terminal.echo(texts.join("\n"));
             return;
-        }
+        } else if (commands.has(args[0])) {
+            const cmd = commands.get(args[0]);
+            const texts = [
+                `Command Name: ${args[0]}`,
+                "",
+                "Alias:",
+                `    ${cmd.options.alias ? cmd.options.alias.join(", ") : "None"}`,
+                "",
+                "Usage:",
+                `    ${cmd.options.usage || "None"}`,
+                "",
+                "Description:",
+                `    ${cmd.options.description || "None"}`,
+                "",
+                "Cooldown:",
+                `    ${cmd.options.cooldown || "None"} sec`,
+                ""
+            ]
 
-        
+            terminal.echo(texts.join("\n"));
+        }
     }
 }

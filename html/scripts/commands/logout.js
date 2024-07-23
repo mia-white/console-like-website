@@ -4,6 +4,6 @@ export default {
         usage: ""
     },
     run: (terminal, args) => {
-        terminal.echo("hello 0w0");
+        terminal.echo("logout coming soon...");
     }
 }

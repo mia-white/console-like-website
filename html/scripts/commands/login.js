@@ -1,9 +1,14 @@
 export default {
     options: {
         description: "",
-        usage: ""
+        usage: "login <username>"
     },
     run: (terminal, args) => {
-        terminal.echo("hello 0w0");
+        const [username, passwd] = args;
+        terminal.set_prompt(`${username} % `);
+
+        if (terminal.get_token()) {
+            terminal.echo("You are already logged in as ");
+        }
     }
 }

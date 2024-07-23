@@ -1,13 +1,10 @@
-import CommandData from "./modules/CommandData.js";
 import CooldownManager from "./modules/CooldownManager.js";
+import CommandData from "./modules/CommandData.js";
+import help from "./commands/help.js";
 
-const commandsMap = new CommandData();
 const Cooldown = new CooldownManager();
-
-const options = {
-    greetings: "Welcome to lu's terminal",
-    prompt: 'guest % '
-}
+const CommandsMap = new CommandData();
+CommandsMap.set("help", help);
 
 const commandHandler = (command, terminal) => {
     // parse command
@@ -15,14 +12,11 @@ const commandHandler = (command, terminal) => {
 
     if (cmdName === "") return;
 
-    const alias = commandsMap.find(cmd => {
-        if (Array.isArray(cmd.options.alias)) {
-            return cmd.options.alias.includes(cmdName);
-        }
-    });
+    const alias = CommandsMap.getFromAlias(cmdName);
 
-    if (commandsMap.has(cmdName) || alias) {
-        const cmd = commandsMap.get(cmdName) || alias;
+    if (CommandsMap.has(cmdName) || alias) {
+        /* if command exists */
+        const cmd = CommandsMap.get(cmdName) || alias;
 
         // cooldown
         if (cmd.options.cooldown) {
@@ -38,9 +32,13 @@ const commandHandler = (command, terminal) => {
         // run
         cmd.run(terminal, args);
     } else {
+        /* if command is not exists */
         terminal.echo(`command not found: ${cmdName}`);
     }
 }
 
 // register
-$("body").terminal(commandHandler, options);
+$("body").terminal(commandHandler, {
+    greetings: "Welcome to lu's terminal\nPlease enter help command\n",
+    prompt: 'guest % '
+});

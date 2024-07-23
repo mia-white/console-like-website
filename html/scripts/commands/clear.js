@@ -3,5 +3,7 @@ export default {
         description: "clean terminal",
         usage: "clear"
     },
-    run: () => {}
+    run: terminal => {
+        terminal.exec("clear");
+    }
 }
