@@ -18,6 +18,14 @@ const commandHandler = (command, terminal) => {
         /* if command exists */
         const cmd = CommandsMap.get(cmdName) || alias;
 
+        // is authorized user
+        if (cmd.options.userOnly) {
+            if (!terminal.get_token()) {
+                terminal.echo("You don't have permission to execute this command.");
+                return;
+            }
+        }
+
         // cooldown
         if (cmd.options.cooldown) {
             if (Cooldown.has(cmdName)) {
@@ -39,6 +47,6 @@ const commandHandler = (command, terminal) => {
 
 // register
 $("body").terminal(commandHandler, {
-    greetings: "Welcome to my terminal\nPlease enter help command\n",
+    greetings: "Welcome to terminal\nPlease enter help command\n",
     prompt: 'guest % '
 });

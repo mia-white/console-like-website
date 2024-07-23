@@ -1,10 +1,10 @@
 export default {
     options: {
-        userOnly: true,
+        name: "init",
         description: "clear all local data from this terminal",
-        usage: "init"
+        userOnly: true
     },
     run: (terminal, args) => {
-        terminal.echo(args.join(" "));
+        terminal.echo("coming soon...");
     }
 }

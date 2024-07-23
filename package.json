@@ -1,13 +1,13 @@
 {
-  "name": "console-like-website",
-  "version": "1.0.0",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "server": "http-server ./",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "http-server": "^14.1.1"
-  }
+    "name": "console-like-website",
+    "version": "1.0.0",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "server": "http-server ./src",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "http-server": "^14.1.1"
+    }
 }

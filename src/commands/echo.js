@@ -1,6 +1,7 @@
 export default {
     options: {
-        description: "echo",
+        name: "echo",
+        description: "echooo",
         usage: "echo <contents>",
         cooldown: 10
     },

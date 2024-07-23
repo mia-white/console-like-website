@@ -9,10 +9,10 @@ import init from "../commands/init.js";
 import login from "../commands/login.js";
 import logout from "../commands/logout.js";
 import nuko from "../commands/nuko.js";
-import viewSources from "../commands/viewSources.js";
+import viewSources from "../commands/viewsources.js";
 
 
-const commands = {
+const commands = [
     clear,
     echo,
     id,
@@ -21,7 +21,7 @@ const commands = {
     logout,
     nuko,
     viewSources
-};
+];
 
 export default class CommandData extends Collection {
     constructor() {
@@ -30,8 +30,8 @@ export default class CommandData extends Collection {
     }
 
     init() {
-        for (const [k, v] of Object.entries(commands)) {
-            super.set(k, v);
+        for (const command of commands) {
+            super.set(command.options.name, command);
         }
     }
 

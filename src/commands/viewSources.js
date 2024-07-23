@@ -1,6 +1,7 @@
 export default {
     options: {
-        alias: ["src"],
+        name: "viewsources",
+        alias: ["src", "viewsrc"],
         description: "",
         usage: ""
     },

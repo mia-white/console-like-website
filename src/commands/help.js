@@ -15,7 +15,6 @@ const getCommandList = () => {
 
         if (i % 7 === 0) {
             commandList.push("\n    ");
-            break;
         }
 
         i++;
@@ -26,6 +25,7 @@ const getCommandList = () => {
 
 export default {
     options: {
+        name: "help",
         description: "help command",
         usage: "help | help <commandName>"
     },
@@ -57,17 +57,22 @@ export default {
                 `    ${cmd.options.alias ? cmd.options.alias.join(", ") : "None"}`,
                 "",
                 "Usage:",
-                `    ${cmd.options.usage || "None"}`,
+                `    ${cmd.options.usage || cmd.options.name}`,
                 "",
                 "Description:",
                 `    ${cmd.options.description || "None"}`,
                 "",
                 "Cooldown:",
                 `    ${cmd.options.cooldown || "None"} sec`,
+                "",
+                "UserOnly:",
+                `    ${cmd.options.userOnly ? true : false}`,
                 ""
             ]
 
             terminal.echo(texts.join("\n"));
+        } else {
+            terminal.echo(`Command is not exist: ${args[0]}`);
         }
     }
 }

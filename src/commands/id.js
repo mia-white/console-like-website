@@ -1,10 +1,10 @@
 export default {
     options: {
-        userOnly: true,
+        name: "id",
         description: "show your session id",
-        usage: "id"
+        userOnly: true
     },
     run: (terminal, args) => {
-        terminal.echo(args.join(" "));
+        terminal.echo(terminal.get_token());
     }
 }

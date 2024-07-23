@@ -1,7 +1,7 @@
 export default {
     options: {
-        description: "clean terminal",
-        usage: "clear"
+        name: "clear",
+        description: "clean terminal"
     },
     run: terminal => {
         terminal.exec("clear");
