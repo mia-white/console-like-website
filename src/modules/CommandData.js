@@ -4,6 +4,8 @@ import Collection from "./Collection.js";
 
 import clear from "../commands/clear.js";
 import echo from "../commands/echo.js";
+import id from "../commands/id.js";
+import init from "../commands/init.js";
 import login from "../commands/login.js";
 import logout from "../commands/logout.js";
 import nuko from "../commands/nuko.js";
@@ -13,9 +15,11 @@ import viewSources from "../commands/viewSources.js";
 const commands = {
     clear,
     echo,
-    nuko,
+    id,
+    init,
     login,
     logout,
+    nuko,
     viewSources
 };
 

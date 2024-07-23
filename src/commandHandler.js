@@ -39,6 +39,6 @@ const commandHandler = (command, terminal) => {
 
 // register
 $("body").terminal(commandHandler, {
-    greetings: "Welcome to lu's terminal\nPlease enter help command\n",
+    greetings: "Welcome to my terminal\nPlease enter help command\n",
     prompt: 'guest % '
 });
